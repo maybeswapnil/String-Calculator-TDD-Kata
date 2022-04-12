@@ -37,6 +37,14 @@ describe("String Calculator",  function(){
     it("should not allow negative numbers", function(){
         expect( function(){ calculator.add("-1,2,3"); } ).throw("negatives not allowed");
     });
+    //6th
+    it("should return the number itself when a single number is passed", function(){
+        expect(calculator.add('1')).equal(1);
+    });
+  
+    it("should return the sum of the numbers if two are given", function(){
+        expect(calculator.add('1,2')).equal(3);
+    });
 
 });
 
@@ -47,12 +55,12 @@ function StringCalculator(){
 StringCalculator.prototype.add = function(stringNumbers) {
     //1st: if nothing is passed as an argument
     if(stringNumbers.length===0) return 0;
-    //4th: deal with delimitter
+    //4th I: deal with delimitter, create reference array
     const numbers = stringNumbers
     .replace(/(\r\n|\n|\r)/gm, ',') // Normalize delimiter
     .split(',')                     // Split values
     .map(n => parseInt(n, 10))      // Convert to integers
-
+    //4th II: replace and remove delimitter and delimitter string respectively
     if(stringNumbers.slice(0, 2) == '//') {
         let delimitter = RegExp(numbers[2], "g") //delimitter: /(?:)/g
         stringNumbers = stringNumbers.replace(stringNumbers.slice(0, 3), "") //remove starting delimitter string
@@ -63,5 +71,7 @@ StringCalculator.prototype.add = function(stringNumbers) {
     //5th: check for negetive numbers
     if(numbers.some(n => n < 0)) throw new Error('negatives not allowed')
     //2nd: for unknown number of arguments seperated by ','
-    if(stringNumbers.indexOf(',') !== -1) return parseInt(stringNumbers.split(',').filter(i => parseInt(i)<1000).reduce((a, b) => parseInt(a) + parseInt(b))); //changes in 4th commit: added filter
+    if(stringNumbers.indexOf(',') !== -1) return parseInt(stringNumbers.split(',').filter(i => parseInt(i)<1000).reduce((a, b) => parseInt(a) + parseInt(b))); //changes in 4th commit: added filter\
+    //6th: if only one value is passed and above cases are not met
+    return parseInt(stringNumbers)
 };
