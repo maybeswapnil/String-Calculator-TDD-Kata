@@ -33,6 +33,10 @@ describe("String Calculator",  function(){
     it("should allow //[*][%]\\n1*2%3%9 in between the input number string", function(){
         expect(calculator.add("//[*][%]\n1*2%3%9")).equal(15);
     });
+    //5th
+    it("should not allow negative numbers", function(){
+        expect( function(){ calculator.add("-1,2,3"); } ).throw("negatives not allowed");
+    });
 
 });
 
@@ -56,6 +60,8 @@ StringCalculator.prototype.add = function(stringNumbers) {
     }
     //3rd: for converting '\n' into ','
     if(stringNumbers.indexOf("\n") !== -1) stringNumbers = stringNumbers.replace(/\n/g, ",")
+    //5th: check for negetive numbers
+    if(numbers.some(n => n < 0)) throw new Error('negatives not allowed')
     //2nd: for unknown number of arguments seperated by ','
     if(stringNumbers.indexOf(',') !== -1) return parseInt(stringNumbers.split(',').filter(i => parseInt(i)<1000).reduce((a, b) => parseInt(a) + parseInt(b))); //changes in 4th commit: added filter
 };
