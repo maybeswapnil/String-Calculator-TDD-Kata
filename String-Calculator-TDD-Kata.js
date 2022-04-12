@@ -24,7 +24,11 @@ describe("String Calculator",  function(){
         // converts the array to a string
         arg = res.join();
         expect(calculator.add(arg)).equal(sum);
-      });
+    });
+    //3rd
+    it("should allow \\n in between the input number string", function(){
+    expect(calculator.add("1\n2\n3")).equal(6);
+    });
 
 });
 
@@ -33,11 +37,11 @@ function StringCalculator(){
 }
 
 StringCalculator.prototype.add = function(stringNumbers) {
-    //1st
+    //1st: if nothing is passed as an argument
     if(stringNumbers.length===0) return 0;
-    //2nd
-    if(stringNumbers.indexOf(',') !== -1) {
-        return parseInt(stringNumbers.split(',').reduce((a, b) => parseInt(a) + parseInt(b)))
-    } 
+    //3rd: for converting '\n' into ','
+    if(stringNumbers.indexOf("\n") !== -1) stringNumbers = stringNumbers.replace(/\n/g, ",")
+    //2nd: for unknown number of arguments seperated by ','
+    if(stringNumbers.indexOf(',') !== -1) return parseInt(stringNumbers.split(',').reduce((a, b) => parseInt(a) + parseInt(b)));
 
 };
