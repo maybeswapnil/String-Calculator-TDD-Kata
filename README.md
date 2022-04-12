@@ -3,7 +3,7 @@ Used mocha for writing test cases\
 ```
 cd String-Calculator-TDD-Kata
 npm i //to install required files like chai and mocha
-mocha String-Calculator-TDD-Kata.js
+npm start
 ```
 # String-Calculator-TDD-Kata Get Started
 Create a simple String calculator with a method signature:\
