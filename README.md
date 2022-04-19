@@ -5,7 +5,7 @@ cd String-Calculator-TDD-Kata
 npm i //to install required files like chai and mocha
 npm start
 ```
-# String-Calculator-TDD-Kata Get Started
+# String-Calculator-TDD-Kata Story
 Create a simple String calculator with a method signature:\
 ———————————————\
 int Add(string numbers)\
